@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var viewModel = StarCardVM()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack{
+            List {
+                ForEach(viewModel.cards) { card in
+                    StarCardView(card: card)
+                }
+            }
+            .navigationTitle("Star Wars")
         }
-        .padding()
+        
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: StarCardVM(repository: TestRepository()))
 }
